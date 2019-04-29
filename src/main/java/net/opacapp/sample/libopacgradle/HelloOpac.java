@@ -1,9 +1,11 @@
 package net.opacapp.sample.libopacgradle;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,17 +21,19 @@ public class HelloOpac
 {
 
 	public static String LIBRARY_NAME = "Bremen";
-	public static String LIBRARY_CONFIG = "{\"account_supported\":true,\"api\":\"sisis\",\"city\":\"Bremen\",\"country\":\"Deutschland\",\"data\":{\"baseurl\":\"https://opac.stadtbibliothek-bremen.de/webOPACClient\"},\"geo\":[53.07929619999999,8.8016937],\"information\":\"http://www.stadtbibliothek-bremen.de/bibliotheken.php\",\"replacedby\":\"de.opacapp.bremen\",\"state\":\"Bremen\",\"title\":\"Stadtbibliothek\"}";
 
 	public static void main(final String[] args)
 			throws JSONException, OpacApi.OpacErrorException, IOException
 	{
 		System.out.println("Hello OPAC!");
 
+		InputStream input = Thread.currentThread().getContextClassLoader()
+				.getResourceAsStream("config.json");
+		String config = IOUtils.toString(input);
+
 		// Create a library object
-		Library library;
-		library = Library.fromJSON(LIBRARY_NAME,
-				new JSONObject(LIBRARY_CONFIG));
+		Library library = Library.fromJSON(LIBRARY_NAME,
+				new JSONObject(config));
 
 		// Instantiate the appropriate API class
 		OpacApi api = OpacApiFactory.create(library, "HelloOpac/1.0.0");

@@ -19,4 +19,5 @@ repositories {
 
 dependencies {
     compile 'net.opacapp:libopac:5.2.5'
+    compile 'commons-io:commons-io:2.4'
 }
