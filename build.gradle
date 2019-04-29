@@ -1,3 +1,7 @@
+wrapper {
+    gradleVersion = '5.2.1'
+}
+
 group 'libopac-sample-gradle'
 version '1.0-SNAPSHOT'
 
