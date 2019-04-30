@@ -2,10 +2,12 @@ package net.opacapp.sample.libopacgradle;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.Security;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,6 +27,8 @@ public class HelloOpac
 	public static void main(final String[] args)
 			throws JSONException, OpacApi.OpacErrorException, IOException
 	{
+		Security.addProvider(new BouncyCastleProvider());
+
 		System.out.println("Hello OPAC!");
 
 		InputStream input = Thread.currentThread().getContextClassLoader()
