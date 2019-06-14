@@ -45,19 +45,32 @@ public class HelloOpac
 
 		System.out.println("Obtaining search fields...");
 		List<SearchField> searchFields = api.getSearchFields();
-		System.out.println("Found a first search field: "
-				+ searchFields.get(0).getDisplayName());
+		System.out.println(
+				String.format("Found %d search fields", searchFields.size()));
+		for (SearchField searchField : searchFields) {
+			System.out.println(String.format("Search field: %s",
+					searchField.getDisplayName()));
+		}
 
+		SearchField searchField = searchFields.get(0);
+		System.out.println(String.format("Using search field: %s",
+				searchField.getDisplayName()));
+
+		String needle = "Hello";
 		List<SearchQuery> query = new ArrayList<>();
-		query.add(new SearchQuery(searchFields.get(0), "Hello"));
-		System.out.println("Searching for 'hello' in this field...");
+		query.add(new SearchQuery(searchField, needle));
+		System.out.println(
+				String.format("Searching for '%s' in this field...", needle));
 
 		SearchRequestResult searchRequestResult = api.search(query);
-		System.out.println("Found "
-				+ searchRequestResult.getTotal_result_count() + " matches.");
-
 		int n = searchRequestResult.getTotal_result_count();
-		for (int i = 0; i < n; i++) {
+		System.out.println(String.format("Found %d matches.",
+				+searchRequestResult.getTotal_result_count()));
+
+		List<SearchResult> results = searchRequestResult.getResults();
+		System.out.println(String.format("Got %d results", results.size()));
+
+		for (int i = 0; i < results.size(); i++) {
 			try {
 				System.out.println("Match: "
 						+ searchRequestResult.getResults().get(i).toString());
