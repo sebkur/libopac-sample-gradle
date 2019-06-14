@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.opacapp:libopac:6.0.4-beta1'
+    compile 'net.opacapp:libopac:6.0.4-beta2'
     compile 'commons-io:commons-io:2.4'
     compile 'org.bouncycastle:bcprov-jdk15on:1.51'
 }
