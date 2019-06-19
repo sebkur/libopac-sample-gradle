@@ -5,7 +5,7 @@ This is a sample how to use libopac in a Gradle project
 
 Usage:
 
-    $ gradlew run
+    $ ./gradlew run
 
 You will receive an output that should look similar to:
 
