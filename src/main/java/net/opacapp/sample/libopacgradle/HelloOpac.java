@@ -64,17 +64,20 @@ public class HelloOpac
 
 		SearchRequestResult searchRequestResult = api.search(query);
 		int n = searchRequestResult.getTotal_result_count();
-		System.out.println(String.format("Found %d matches.",
-				+searchRequestResult.getTotal_result_count()));
+		System.out.println(String.format("Found %d matches.", n));
 
 		List<SearchResult> results = searchRequestResult.getResults();
 		System.out.println(String.format("Got %d results", results.size()));
 
 		for (int i = 0; i < results.size(); i++) {
+			SearchResult result = searchRequestResult.getResults().get(i);
+			System.out.println("Match: " + result.toString());
+		}
+
+		for (int i = 0; i < results.size(); i++) {
 			try {
-				System.out.println("Match: "
-						+ searchRequestResult.getResults().get(i).toString());
 				SearchResult result = searchRequestResult.getResults().get(i);
+				System.out.println("Match: " + result.toString());
 				DetailedItem detailedItem = api.getResultById(result.getId(),
 						null);
 				System.out.println("Got details: " + detailedItem.toString());
